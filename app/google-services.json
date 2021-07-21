@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701189242351",
+    "project_id": "fir-tutorial-anomdev2021",
+    "storage_bucket": "fir-tutorial-anomdev2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701189242351:android:ccd401ce3fe69806184a1a",
+        "android_client_info": {
+          "package_name": "com.anomdev.firebasetutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701189242351-tcjkqqn4mkdp0efuf9lgutkvb0m47bs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD24KP4fGBmdBBmIpjPBMmkFkohbCMu5hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701189242351-tcjkqqn4mkdp0efuf9lgutkvb0m47bs8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

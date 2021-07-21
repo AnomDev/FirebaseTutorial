@@ -1,0 +1,2 @@
+rootProject.name = "FirebaseTutorial"
+include ':app'
