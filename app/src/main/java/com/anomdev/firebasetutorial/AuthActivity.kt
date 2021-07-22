@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
@@ -18,14 +24,15 @@ import kotlinx.android.synthetic.main.activity_home.*
 class AuthActivity : AppCompatActivity() {
 
     private val GOOGLE_SIGN_IN = 100
+    private val callBackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        /*
+
         //Splash Screen
 
-        Thread.sleep(2000)
-        setTheme(R.style.AppTheme)
-        */
+        Thread.sleep(2500)
+        setTheme(R.style.Theme_FirebaseTutorial)
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -101,7 +108,48 @@ class AuthActivity : AppCompatActivity() {
 
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN) //Aquí iniciamos una activity pidiendo que nos responda algo (el id de autenticación GOOGLE_SIGN_IN")
 
+        }
 
+        //Aquí está la lógica para el registro/login mediante Facebook
+        /*TODO:
+           No se yo si este login va a funcionar ya que creo que no está bien puesta la hash de clave de desarrollo
+           He puesto esta:
+                4juqxR+bfCEhOEDslBTwAePpz74=
+           usando este comando:
+                keytool -exportcert -alias androiddebugkey -keystore "C:\Documents and Settings\Administrator.android\debug.keystore" | "C:\OpenSSL\bin\openssl" sha1 -binary |"C:\OpenSSL\bin\openssl" base64
+           usando la CMD en la ruta:
+                 C:\Program Files\Java\jdk-16.0.2\bin>
+        */
+        facebook_btn.setOnClickListener{
+
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+
+            LoginManager.getInstance().registerCallback(callBackManager,
+            object : FacebookCallback<LoginResult> {
+
+                override fun onSuccess(result: LoginResult?) { //Aquí nos habríamos autenticado en el servidor de Facebook
+                    result?.let {
+                        val tokenAuthFacebook = it.accessToken
+
+                        val credential = FacebookAuthProvider.getCredential(tokenAuthFacebook.token)
+                        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
+                            if (it.isSuccessful){
+                                showHome(it.result?.user?.email ?: "", ProviderType.FACEBOOK)
+                            } else {
+                                showAlert()
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancel() {
+
+                }
+
+                override fun onError(error: FacebookException?) {
+                    showAlert()
+                }
+            })
         }
     }
 
@@ -151,6 +199,8 @@ class AuthActivity : AppCompatActivity() {
 
     //Al iniciar una actividad pidiendole una respuesta, necesitamos sobreescribir onActivityResult
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callBackManager.onActivityResult(requestCode,resultCode, data)
+
         super.onActivityResult(requestCode, resultCode, data)
 
         //Esta parte autentica en los servidores de GOOGLE.

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Firebase</string>
     <string name="prefs_file">com.anomdev.firebasetutorial.PREFERENCE_FILE_KEY</string>
+    <string name="facebook_app_id">345744247088977</string>
+    <string name="fb_login_protocol_scheme">fb345744247088977</string>
+    <string name="developed_by_anomdev_2021">📱 Developed by <b>AnomDev</b>☢2021</string>
 </resources>

@@ -3,6 +3,8 @@ package com.anomdev.firebasetutorial
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -44,8 +46,17 @@ class HomeActivity : AppCompatActivity() {
             prefs.clear()
             prefs.apply()
 
+            if(provider == ProviderType.FACEBOOK.name){
+                LoginManager.getInstance().logOut()
+        }
+
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
     }
+
+    /*fun toastAnomDev () {
+        Toast.makeText(this, this.getString(R.string.developed_by_anomdev_2021), Toast.LENGTH_SHORT).show()
+    }*/
+
 }

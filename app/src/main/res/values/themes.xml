@@ -6,13 +6,12 @@
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@android:color/white</item>
 
-        <!-- Temporal -->
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorPrimaryDark</item>
-        <item name="colorSecondaryVariant">@color/colorPrimary</item>
-        <item name="colorOnSecondary">@android:color/white</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
+
+        <!-- Customize your theme here. -->
+    <style name="SplashTheme" parent="Theme.FirebaseTutorial">
+        <item name ="android:windowBackground">@drawable/splash</item>
+    </style>
+
 </resources>
