@@ -8,6 +8,7 @@
     tools:context=".AuthActivity">
 
     <LinearLayout
+        android:id="@+id/auth_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -48,7 +49,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/logout_btn"
+                android:id="@+id/signup_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -68,7 +69,35 @@
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="Acceder"
                 android:textColor="@android:color/white" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/google_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@android:color/white"
+            android:drawableEnd="@mipmap/google"
+            android:paddingLeft="16dp"
+            android:text="Google"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/facebook_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
+            android:drawableEnd="@mipmap/facebook"
+            android:paddingLeft="16dp"
+            android:text="Facebook"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark" />
 
     </LinearLayout>
 
