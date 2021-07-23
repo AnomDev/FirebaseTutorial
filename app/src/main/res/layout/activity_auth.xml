@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="24sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -37,7 +38,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="24sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -46,16 +48,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/signup_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Registrarse"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
             <Space
                 android:layout_width="8dp"
@@ -63,12 +67,13 @@
 
             <Button
                 android:id="@+id/login_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="Acceder"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -82,7 +87,8 @@
             android:paddingLeft="16dp"
             android:text="Google"
             android:textAlignment="textStart"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -97,7 +103,8 @@
             android:paddingLeft="16dp"
             android:text="Facebook"
             android:textAlignment="textStart"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

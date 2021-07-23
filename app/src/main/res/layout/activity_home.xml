@@ -8,6 +8,7 @@
     tools:context=".HomeActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,24 +21,87 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/title_user_email_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User email:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+        <TextView
             android:id="@+id/email_tv"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Email" />
+            android:text="Email"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <TextView
+            android:id="@+id/title_provider_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login provider:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+        <TextView
             android:id="@+id/provider_tv"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Proveedor" />
+            android:text="Proveedor"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/title_address_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postal address:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/address_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Calle, número, piso"
+            android:inputType="textPostalAddress"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/title_phone_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone number:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/phone_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,15 +109,64 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/logout_btn"
+                android:id="@+id/savedata_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="@color/colorAccent"
-                android:text="Cerrar sesión"
-                android:textColor="@android:color/white" />
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Guardar datos"
+                android:textColor="@color/colorBackground"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/fetchdata_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Recuperar datos"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:id="@+id/warning_erasedata_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¡Cuidado! Esta opción es irreversible."
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/erasedata_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="Borrar datos"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -68,6 +181,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="600dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:layout_editor_absoluteX="16dp">
+
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Cerrar sesión"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
@@ -78,6 +221,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/anomdevlogo"/>
-<!--        android:onClick="toastAnomDev"-->
+
+    <!--        android:onClick="toastAnomDev"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

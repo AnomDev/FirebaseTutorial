@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
 
 enum class ProviderType{
@@ -15,6 +16,9 @@ enum class ProviderType{
 }
 //Cuando el usuario llega a esta pantalla es porque ya ha hecho el registro y ha sido satisfactorio.
 class HomeActivity : AppCompatActivity() {
+
+    //Creamos una instancia global a nuestra base de datos para poder utilizarla en el proyecto
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +57,29 @@ class HomeActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
+
+        //Lógica del botón de guardar datos en Cloud Firestore
+        savedata_btn.setOnClickListener {
+            db.collection("users").document(email).set(
+                hashMapOf("provider" to provider,
+                "address" to address_et.text.toString(),
+                "phone" to phone_et.text.toString())
+            )
+        }
+
+        //Lógica del botón de recuperar datos de Cloud Firestore
+        fetchdata_btn.setOnClickListener {
+            db.collection("users").document(email).get().addOnSuccessListener {
+                address_et.setText(it.get("address")as String?)
+                phone_et.setText(it.get("phone")as String?)
+            }
+        }
+
+        //Lógica del botón de eliminar datos en Cloud Firestore
+        erasedata_btn.setOnClickListener {
+            db.collection("users").document(email).delete()
+        }
+
     }
 
     /*fun toastAnomDev () {
