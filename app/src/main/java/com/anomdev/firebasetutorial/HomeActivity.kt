@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
 
+//Creamos una EnumClass con los diferentes tipos de proveedores de registro y login que vamos a tener en nuestra app.
 enum class ProviderType{
     BASIC,
     GOOGLE,

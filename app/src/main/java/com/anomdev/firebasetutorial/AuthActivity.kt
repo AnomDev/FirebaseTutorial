@@ -20,11 +20,23 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.activity_home.*
+import java.util.regex.Pattern
 
 class AuthActivity : AppCompatActivity() {
 
     private val GOOGLE_SIGN_IN = 100
     private val callBackManager = CallbackManager.Factory.create()
+
+    //TODO: Esto me servirá para validar el formato del email pero falta implementarlo.
+    private val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -66,11 +78,11 @@ class AuthActivity : AppCompatActivity() {
                         if (it.isSuccessful){
                             showHome(it.result?.user?.email ?: "",ProviderType.BASIC)
                         } else {
-                            showAlert()
+                            showAlert("Error en el registro","Algo ha fallado en el registro con usuario y contraseña. Vuelve a intentarlo más adelante.")
                         }
                 }
             } else {
-                showAlert()
+                showAlert("Campos sin rellenar","Por favor, asegúrate de rellenar todos los campos")
             }
         }
 
@@ -88,9 +100,11 @@ class AuthActivity : AppCompatActivity() {
                     if (it.isSuccessful){
                         showHome(it.result?.user?.email ?: "",ProviderType.BASIC)
                     } else {
-                        showAlert()
+                        showAlert("Error en el login","Algo ha fallado en el login con usuario y contraseña. Vuelve a intentarlo más adelante.")
                     }
                 }
+            } else{
+                showAlert("Campos sin rellenar","Por favor, asegúrate de rellenar todos los campos")
             }
         }
 
@@ -136,7 +150,7 @@ class AuthActivity : AppCompatActivity() {
                             if (it.isSuccessful){
                                 showHome(it.result?.user?.email ?: "", ProviderType.FACEBOOK)
                             } else {
-                                showAlert()
+                                showAlert("Facebook Error","Algo ha fallado en el login con Facebook. Vuelve a intentarlo más adelante.")
                             }
                         }
                     }
@@ -153,19 +167,6 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-    // Creamos una función para mostrar un Alert si algo ha ido mal
-    private fun showAlert(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error en el proceso de autenticación")
-        builder.setPositiveButton("Aceptar",null)
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
 
     //En esta función realizamos la navegación entre pantallas (de Auth a Home) con los datos de mail y pass.
     private fun showHome(email: String, provider: ProviderType){
@@ -219,17 +220,28 @@ class AuthActivity : AppCompatActivity() {
                         if (it.isSuccessful){
                             showHome(account.email ?: "", ProviderType.GOOGLE)
                         } else {
-                            showAlert()
+                            showAlert("Gmail Error","Algo ha fallado en el login con Gmail. Vuelve a intentarlo más adelante.")
                         }
                     }
 
                 }
             } catch (e: ApiException){
-                showAlert()
+                showAlert("Error TryCatch", "Error en el try...catch")
             }
 
 
         }
+    }
+
+    // Creamos una función para mostrar un Alert si algo ha ido mal
+    private fun showAlert(title: String="Error", message: String="Algo ha ido mal. Pruebe de nuevo más adelante."){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton("Aceptar",null)
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
 }
