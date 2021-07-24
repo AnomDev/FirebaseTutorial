@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -19,14 +20,15 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
-import java.util.regex.Pattern
 
 class AuthActivity : AppCompatActivity() {
 
     private val GOOGLE_SIGN_IN = 100
+
     private val callBackManager = CallbackManager.Factory.create()
 
-    //TODO: Esto me servirá para validar el formato del email pero falta implementarlo.
+    // En esta variable global se encuentran las validaciones que tiene que seguir el formato del email
+    // El formato será: char,sym,num + @ + char,sym,num + . + char,sym,num
     private val EMAIL_ADDRESS_PATTERN = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
             "\\@" +
             "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
@@ -35,11 +37,9 @@ class AuthActivity : AppCompatActivity() {
             "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
             ")+"
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         //Splash Screen
-
         Thread.sleep(2500)
         setTheme(R.style.Theme_FirebaseTutorial)
 
@@ -53,14 +53,17 @@ class AuthActivity : AppCompatActivity() {
         bundle.putString("message", "Integracion de Firebase completa")
         analytics.logEvent("InitScreen", bundle)
 
-        //Registros y login
+        // Registros y login
         setup()
 
-        //Comprobación de sesión abierta anterior
+        // Comprobación de sesión abierta anterior
         session()
+
+        // Marca personal
+        anomDevLogo()
     }
 
-
+    //En esta función está toda la lógica de registros y login con los diferentes proveedores
     private fun setup() {
         title = "Autenticación"
 
@@ -81,76 +84,76 @@ class AuthActivity : AppCompatActivity() {
                     }
                 }
             }
-        /*
+            /*
 
-            //TODO: La gracia sería meter todas las validaciones en una función y en Setup() llamarla para no llenarlo todo de código
-            //if (validateForm())
+                //TODO: La gracia sería meter todas las validaciones en una función y en Setup() llamarla para no llenarlo todo de código
+                //if (validateForm())
 
 
-            //Aquí realizaremos todas las comprobaciones de los campos email y password
-            if (email_et.text.isNotEmpty()
-                && email_et.text.isNotBlank()
-                && email_et.text.contains("@" + ".")
-                && password_et.text.isNotEmpty()
-                && password_et.text.isNotBlank()
-                && password_et.text.length >= 6
-            ) {
+                //Aquí realizaremos todas las comprobaciones de los campos email y password
+                if (email_et.text.isNotEmpty()
+                    && email_et.text.isNotBlank()
+                    && email_et.text.contains("@" + ".")
+                    && password_et.text.isNotEmpty()
+                    && password_et.text.isNotBlank()
+                    && password_et.text.length >= 6
+                ) {
 
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                    email_et.text.toString(),
-                    password_et.text.toString()
-                ).addOnCompleteListener {
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                        email_et.text.toString(),
+                        password_et.text.toString()
+                    ).addOnCompleteListener {
 
-                    //Aquí nos notificará si la petición se ha cumplido satisfactoriamente
-                    if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
-                    } else {
+                        //Aquí nos notificará si la petición se ha cumplido satisfactoriamente
+                        if (it.isSuccessful) {
+                            showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        } else {
+                            showAlert(
+                                "Error en el registro",
+                                "Algo ha fallado en el registro con usuario y contraseña. Vuelve a intentarlo más adelante."
+                            )
+                        }
+                    }
+                } else {
+                    if (!email_et.text.isNotEmpty()) {
                         showAlert(
-                            "Error en el registro",
-                            "Algo ha fallado en el registro con usuario y contraseña. Vuelve a intentarlo más adelante."
+                            "Email sin rellenar",
+                            "Por favor, asegúrate de rellenar el email"
+                        )
+
+                    }
+                    if (!email_et.text.isNotBlank()) {
+                        showAlert(
+                            "Espacios en blanco",
+                            "Por favor, asegúrate de no dejar espacios en blanco"
                         )
                     }
-                }
-            } else {
-                if (!email_et.text.isNotEmpty()) {
-                    showAlert(
-                        "Email sin rellenar",
-                        "Por favor, asegúrate de rellenar el email"
-                    )
+                    if (!email_et.text.contains("@")) {
+                        showAlert(
+                            "Formato incorrecto",
+                            "El formato del email no tiene la sintáxis correcta. Revísalo."
+                        )
+                    }
+                    if (!password_et.text.isNotEmpty()) {
+                        showAlert(
+                            "Contraseña sin rellenar",
+                            "Por favor, asegúrate de rellenar la contraseña"
+                        )
+                    }
+                    if (!password_et.text.isNotBlank()) {
+                        showAlert(
+                            "Espacios en blanco",
+                            "La contraseña no puede tener espacios en blanco"
+                        )
+                    }
+                    if (password_et.text.length < 6) {
+                        showAlert(
+                            "Contraseña demasiado corta",
+                            "La contraseña debe tener como mínimo 6 caractéres"
+                        )
+                    }
 
-                }
-                if (!email_et.text.isNotBlank()) {
-                    showAlert(
-                        "Espacios en blanco",
-                        "Por favor, asegúrate de no dejar espacios en blanco"
-                    )
-                }
-                if (!email_et.text.contains("@")) {
-                    showAlert(
-                        "Formato incorrecto",
-                        "El formato del email no tiene la sintáxis correcta. Revísalo."
-                    )
-                }
-                if (!password_et.text.isNotEmpty()) {
-                    showAlert(
-                        "Contraseña sin rellenar",
-                        "Por favor, asegúrate de rellenar la contraseña"
-                    )
-                }
-                if (!password_et.text.isNotBlank()) {
-                    showAlert(
-                        "Espacios en blanco",
-                        "La contraseña no puede tener espacios en blanco"
-                    )
-                }
-                if (password_et.text.length < 6) {
-                    showAlert(
-                        "Contraseña demasiado corta",
-                        "La contraseña debe tener como mínimo 6 caractéres"
-                    )
-                }
-
-            }*/
+                }*/
         }
 
         //Aquí está la lógica para el login mediante usuario y contraseña
@@ -253,7 +256,6 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-
     //En esta función realizamos la navegación entre pantallas (de Auth a Home) con los datos de mail y pass.
     private fun showHome(email: String, provider: ProviderType) {
         val homeIntent = Intent(this, HomeActivity::class.java).apply {
@@ -319,11 +321,12 @@ class AuthActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 showAlert("Error TryCatch", "Error en el try...catch")
             }
+
         }
     }
 
-    private fun validateSignUpForm(): Boolean{
-        //Aquí realizaremos todas las comprobaciones de los campos email y password
+    //Aquí realizaremos todas las comprobaciones de los campos email y password, si es correcto devolverá un true.
+    private fun validateSignUpForm(): Boolean {
         if (email_et.text.isNotEmpty()
             && email_et.text.isNotBlank()
             && email_et.text.contains("@")
@@ -346,13 +349,7 @@ class AuthActivity : AppCompatActivity() {
                     "Por favor, asegúrate de no dejar espacios en blanco"
                 )
             }
-            if (!email_et.text.contains("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                        "\\@" +
-                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                        "(" +
-                        "\\." +
-                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                        ")+")) {
+            if (!email_et.text.contains(EMAIL_ADDRESS_PATTERN)) {
                 showAlert(
                     "Formato incorrecto",
                     "El formato del email no tiene la sintáxis correcta. Revísalo."
@@ -393,6 +390,12 @@ class AuthActivity : AppCompatActivity() {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    fun anomDevLogo(){
+        anomdevlogo_iv.setOnClickListener{
+            Toast.makeText(this, this.getString(R.string.developed_by_anomdev_2021), Toast.LENGTH_LONG).show()
+        }
     }
 
 }

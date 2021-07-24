@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
 
+
         // Setup
         val bundle: Bundle? = intent.extras
         val email: String? = bundle?.getString("email")
@@ -84,7 +85,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     /*fun toastAnomDev () {
-        Toast.makeText(this, this.getString(R.string.developed_by_anomdev_2021), Toast.LENGTH_SHORT).show()
     }*/
 
 }
