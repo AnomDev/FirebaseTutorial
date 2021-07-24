@@ -19,6 +19,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- TODO: Al hacer este ET de Material me falla en AuthActivity porque me dice que tengo que meterle un
+             email_et.text?.isNotEmpty()   -->
+        <!--<com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_inputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_inputet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textSize="24sp" >
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+
         <EditText
             android:id="@+id/email_et"
             android:layout_width="match_parent"
