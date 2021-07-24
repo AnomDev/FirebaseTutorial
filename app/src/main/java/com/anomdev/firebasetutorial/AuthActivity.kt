@@ -319,8 +319,6 @@ class AuthActivity : AppCompatActivity() {
             } catch (e: ApiException) {
                 showAlert("Error TryCatch", "Error en el try...catch")
             }
-
-
         }
     }
 
@@ -333,7 +331,7 @@ class AuthActivity : AppCompatActivity() {
             && password_et.text.isNotBlank()
             && password_et.text.length >= 6
         ) {
-            return true
+            //TODO: Realmente esto está vacío, por tanto si todo es correcto no hace nada (salvo que el return true haga referencia a este código).
         } else {
             if (!email_et.text.isNotEmpty()) {
                 showAlert(
@@ -348,7 +346,13 @@ class AuthActivity : AppCompatActivity() {
                     "Por favor, asegúrate de no dejar espacios en blanco"
                 )
             }
-            if (!email_et.text.contains("@")) {
+            if (!email_et.text.contains("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                        "\\@" +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                        "(" +
+                        "\\." +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                        ")+")) {
                 showAlert(
                     "Formato incorrecto",
                     "El formato del email no tiene la sintáxis correcta. Revísalo."
@@ -372,9 +376,9 @@ class AuthActivity : AppCompatActivity() {
                     "La contraseña debe tener como mínimo 6 caractéres"
                 )
             }
-
         }
-        return false
+        // TODO: En cambio, en mi cabeza aquí debería devolver un false, porque está después del else :S
+        return true
     }
 
     // Creamos una función para mostrar un Alert si algo ha ido mal

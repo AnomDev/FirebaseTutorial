@@ -3,7 +3,8 @@
     <item android:drawable="@color/colorPrimary"/>
     <item>
         <bitmap android:src = "@drawable/splash_logo"
-            android:gravity="fill_horizontal"/>
+            android:gravity="fill_horizontal"
+            />
     </item>
 
 </layer-list>
