@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textSize="24sp" />
 
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Contraseña"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textSize="24sp" />
 
@@ -64,7 +64,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1">
 
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Registrarse"
+                android:text="@string/signup"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:text="Acceder"
+                android:text="@string/login"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -101,8 +101,9 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@android:color/white"
             android:drawableEnd="@mipmap/google"
-            android:paddingLeft="16dp"
-            android:text="Google"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/google"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
@@ -117,8 +118,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
             android:drawableEnd="@mipmap/facebook"
-            android:paddingLeft="16dp"
-            android:text="Facebook"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/facebook"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
@@ -130,20 +132,11 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="72dp"
+        android:contentDescription="@string/brand_iv_content_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/anomdevlogo" />
 
-    <!--<TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@string/developed_by_anomdev_2021"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

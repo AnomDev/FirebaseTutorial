@@ -20,6 +20,8 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
+import java.util.regex.Pattern
+import kotlin.math.E
 
 class AuthActivity : AppCompatActivity() {
 
@@ -29,13 +31,11 @@ class AuthActivity : AppCompatActivity() {
 
     // En esta variable global se encuentran las validaciones que tiene que seguir el formato del email
     // El formato será: char,sym,num + @ + char,sym,num + . + char,sym,num
-    private val EMAIL_ADDRESS_PATTERN = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-            "\\@" +
-            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-            "(" +
-            "\\." +
-            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-            ")+"
+    private val VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(
+        "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$",
+        Pattern.CASE_INSENSITIVE
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -59,17 +59,16 @@ class AuthActivity : AppCompatActivity() {
         // Comprobación de sesión abierta anterior
         session()
 
-        // Marca personal
+        // Genera un toast con mi personal brand
         anomDevLogo()
     }
 
     //En esta función está toda la lógica de registros y login con los diferentes proveedores
     private fun setup() {
-        title = "Autenticación"
+        title = getString(R.string.title_auth_activity)
 
         //Aquí está la lógica para el registro por medio de usuario y contraseña
         signup_btn.setOnClickListener {
-            validateSignUpForm()
 
             if (validateSignUpForm()) {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
@@ -327,55 +326,55 @@ class AuthActivity : AppCompatActivity() {
 
     //Aquí realizaremos todas las comprobaciones de los campos email y password, si es correcto devolverá un true.
     private fun validateSignUpForm(): Boolean {
-        if (email_et.text.isNotEmpty()
+         return if (email_et.text.isNotEmpty()
             && email_et.text.isNotBlank()
-            && email_et.text.contains("@")
+            && email_et.text.toString().isEmail()
             && password_et.text.isNotEmpty()
             && password_et.text.isNotBlank()
             && password_et.text.length >= 6
         ) {
-            //TODO: Realmente esto está vacío, por tanto si todo es correcto no hace nada (salvo que el return true haga referencia a este código).
+                true
+             //TODO: Realmente esto está vacío, por tanto si todo es correcto no hace nada (salvo que el return true haga referencia a este código).
         } else {
             if (!email_et.text.isNotEmpty()) {
                 showAlert(
-                    "Email sin rellenar",
-                    "Por favor, asegúrate de rellenar el email"
+                    getString(R.string.emptyfields_email_title_ad),
+                    getString(R.string.emptyfields_email_description_ad)
                 )
-
             }
-            if (!email_et.text.isNotBlank()) {
+           else if (!email_et.text.isNotBlank()) {
                 showAlert(
                     "Espacios en blanco",
                     "Por favor, asegúrate de no dejar espacios en blanco"
                 )
+
             }
-            if (!email_et.text.contains(EMAIL_ADDRESS_PATTERN)) {
+            else if (!email_et.text.contains("@")) {
                 showAlert(
                     "Formato incorrecto",
                     "El formato del email no tiene la sintáxis correcta. Revísalo."
                 )
             }
-            if (!password_et.text.isNotEmpty()) {
+            else if (!password_et.text.isNotEmpty()) {
                 showAlert(
-                    "Contraseña sin rellenar",
+                    getString(R.string.emptyfields_email_title_ad),
                     "Por favor, asegúrate de rellenar la contraseña"
                 )
             }
-            if (!password_et.text.isNotBlank()) {
+            else if (!password_et.text.isNotBlank()) {
                 showAlert(
                     "Espacios en blanco",
                     "La contraseña no puede tener espacios en blanco"
                 )
             }
-            if (password_et.text.length < 6) {
+            else if (password_et.text.length < 6) {
                 showAlert(
                     "Contraseña demasiado corta",
                     "La contraseña debe tener como mínimo 6 caractéres"
                 )
             }
-        }
+        false }
         // TODO: En cambio, en mi cabeza aquí debería devolver un false, porque está después del else :S
-        return true
     }
 
     // Creamos una función para mostrar un Alert si algo ha ido mal
@@ -392,10 +391,16 @@ class AuthActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun anomDevLogo(){
-        anomdevlogo_iv.setOnClickListener{
-            Toast.makeText(this, this.getString(R.string.developed_by_anomdev_2021), Toast.LENGTH_LONG).show()
+    fun anomDevLogo() {
+        anomdevlogo_iv.setOnClickListener {
+            Toast.makeText(this, this.getString(R.string.brand_logo_toast), Toast.LENGTH_LONG)
+                .show()
         }
+    }
+
+    fun String.isEmail(): Boolean {
+        val matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(this)
+        return matcher.find()
     }
 
 }

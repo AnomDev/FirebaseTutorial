@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setup(email: String, provider: String) {
-        title = "Inicio"
+        title = getString(R.string.title_home_activity)
         email_tv.text = email
         provider_tv.text = provider
 

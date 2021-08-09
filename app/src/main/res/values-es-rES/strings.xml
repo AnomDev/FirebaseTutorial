@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- AuthActivity -->
+    <string name="title_auth_activity">Por favor, autentícate</string>
+    <string name="password">Contraseña</string>
+    <string name="signup">Registrarse</string>
+    <string name="login">Acceder</string>
+    <string name="brand_logo_toast">📱 Desarrollado por <b>AnomDev</b>☢2021</string>
+    <string name="brand_iv_content_description">The brand logo of AnomDev: it is a Elvis operator with two dreadlocks</string>
+
+    <!-- AuthActivity AlertDialogs-->
+    <string name="emptyfields_email_title_ad">Campos vacíos</string>
+    <string name="emptyfields_email_description_ad">El campo del <b>email</b> está vacío</string>
+
+    <string name="emptyfields_password_title_ad">Campos vacíos</string>
+    <string name="emptyfields_password_description_ad">El campo de la <b>contraseña</b> está vacío</string>
+
+    <!-- HomeActivity -->
+    <string name="title_home_activity">Inicio</string>
+    <string name="user_email">Email del usuario:</string>
+    <string name="login_provider">Proveedor de acceso:</string>
+    <string name="provider">PROVEEDOR</string>
+    <string name="postal_address">Dirección postal:</string>
+    <string name="postal_address_hint">Calle, número, piso,…</string>
+    <string name="phone_number">Número de teléfono:</string>
+    <string name="phone_number_hint">Teléfono</string>
+    <string name="save_data">Guardar datos</string>
+    <string name="recover_data">Recuperar datos</string>
+    <string name="warning_erase_data">¡CUIDADO! Esta opción es irreversible.</string>
+    <string name="erase_data">Borrar los datos asociados</string>
+    <string name="log_out">Cerrar sesión</string>
+
+    <!-- HomeActivity AlertDialogs-->
+
+
+</resources>

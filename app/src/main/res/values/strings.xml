@@ -1,7 +1,48 @@
 <resources>
-    <string name="app_name">Firebase</string>
-    <string name="prefs_file">com.anomdev.firebasetutorial.PREFERENCE_FILE_KEY</string>
-    <string name="facebook_app_id">345744247088977</string>
-    <string name="fb_login_protocol_scheme">fb345744247088977</string>
-    <string name="developed_by_anomdev_2021">📱 Developed by <b>AnomDev</b>☢2021</string>
+    <!-- Non translatable -->
+    <string name="app_name" translatable="false">Firebase</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="google" translatable="false">Google</string>
+    <string name="facebook" translatable="false">Facebook</string>
+
+
+    <string name="prefs_file" translatable="false">com.anomdev.firebasetutorial.PREFERENCE_FILE_KEY</string>
+    <string name="facebook_app_id" translatable="false">345744247088977</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb345744247088977</string>
+
+
+
+    <!-- AuthActivity -->
+    <string name="title_auth_activity">Please, authenticate</string>
+    <string name="password">Password</string>
+    <string name="signup">Sign up</string>
+    <string name="login">Log in</string>
+    <string name="brand_logo_toast">📱 Developed by <b>AnomDev</b>☢2021</string>
+    <string name="brand_iv_content_description">The brand logo of AnomDev: it is a Elvis operator with two dreadlocks</string>
+
+    <!-- AuthActivity AlertDialogs-->
+    <string name="emptyfields_email_title_ad">Empty field</string>
+    <string name="emptyfields_email_description_ad">The <b>email</b> field is empty</string>
+
+    <string name="emptyfields_password_title_ad">Empty field</string>
+    <string name="emptyfields_password_description_ad">The <b>password</b> field is empty</string>
+
+    <!-- HomeActivity -->
+    <string name="title_home_activity">Home</string>
+    <string name="user_email">User email:</string>
+    <string name="login_provider">Login provider:</string>
+    <string name="provider">PROVIDER</string>
+    <string name="postal_address">Postal address:</string>
+    <string name="postal_address_hint">Street, number, flat,…</string>
+    <string name="phone_number">Phone number:</string>
+    <string name="phone_number_hint">Phone</string>
+    <string name="save_data">Save data</string>
+    <string name="recover_data">Recover data</string>
+    <string name="warning_erase_data">WARNING! This option is irreversible.</string>
+    <string name="erase_data">Erase all associated data</string>
+    <string name="log_out">Log out</string>
+
+    <!-- HomeActivity AlertDialogs-->
+
+
 </resources>

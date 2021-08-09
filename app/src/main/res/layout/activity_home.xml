@@ -24,7 +24,7 @@
             android:id="@+id/title_user_email_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="User email:"
+            android:text="@string/user_email"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp" />
 
@@ -32,7 +32,7 @@
             android:id="@+id/email_tv"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Email"
+            android:text="@string/email"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
@@ -45,7 +45,7 @@
             android:id="@+id/title_provider_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login provider:"
+            android:text="@string/login_provider"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp" />
 
@@ -53,7 +53,7 @@
             android:id="@+id/provider_tv"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Proveedor"
+            android:text="@string/provider"
             android:textAlignment="textStart"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
@@ -67,7 +67,7 @@
             android:id="@+id/title_address_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Postal address:"
+            android:text="@string/postal_address"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp" />
 
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Calle, número, piso"
+            android:hint="@string/postal_address_hint"
             android:inputType="textPostalAddress"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
@@ -89,7 +89,7 @@
             android:id="@+id/title_phone_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phone number:"
+            android:text="@string/phone_number"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp" />
 
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Teléfono"
+            android:hint="@string/phone_number_hint"
             android:inputType="phone"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Guardar datos"
+                android:text="@string/save_data"
                 android:textColor="@color/colorBackground"
                 android:textSize="16sp" />
 
@@ -127,11 +127,10 @@
 
             <Button
                 android:id="@+id/fetchdata_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:text="Recuperar datos"
+                android:text="@string/recover_data"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -145,7 +144,7 @@
             android:id="@+id/warning_erasedata_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="¡Cuidado! Esta opción es irreversible."
+            android:text="@string/warning_erase_data"
             android:textAlignment="center"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="16sp" />
@@ -161,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_red_dark"
-                android:text="Borrar datos"
+                android:text="@string/erase_data"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -191,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/colorAccent"
-            android:text="Cerrar sesión"
+            android:text="@string/log_out"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
